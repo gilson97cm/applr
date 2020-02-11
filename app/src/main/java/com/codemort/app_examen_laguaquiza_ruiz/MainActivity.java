@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Button btnSearch;
     Button btnDelete;
+    Button btnRange;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +40,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnRegister = (Button) findViewById(R.id.btnRegister);
         btnList = (Button) findViewById(R.id.btnList);
         btnDelete = (Button) findViewById(R.id.btnDelete);
+        btnRange = (Button) findViewById(R.id.btnRange);
 
         btnRegister.setOnClickListener(this);
         btnList.setOnClickListener(this);
         btnDelete.setOnClickListener(this);
+        btnRange.setOnClickListener(this);
 
         btnSearch = (Button) findViewById(R.id.btnSearch);
 
@@ -70,6 +73,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btnList:
                 intent = new Intent(this, ListaAspirantes.class);
+               startActivity(intent);
+                break;
+                case R.id.btnRange:
+                intent = new Intent(this, mayor.class);
                startActivity(intent);
                 break;
             case R.id.btnSearch:
