@@ -10,7 +10,7 @@
         android:textStyle="bold"
         android:textSize="20dp"
         android:textAlignment="center"
-        android:text="REGISTRO DE PEDIDOS"
+        android:text="REGISTRO DE ASPIRANTES"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

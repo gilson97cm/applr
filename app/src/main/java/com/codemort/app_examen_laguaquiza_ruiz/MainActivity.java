@@ -69,8 +69,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.btnList:
-              //  intent = new Intent(this, ListaPedidos.class);
-               // startActivity(intent);
+                intent = new Intent(this, ListaAspirantes.class);
+               startActivity(intent);
                 break;
             case R.id.btnSearch:
                 search(codigo_);
@@ -94,13 +94,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             ContentValues registro = new ContentValues();
 
-            Cursor fila = baseDatos.rawQuery("SELECT * FROM aspirantes WHERE codigo = '"+codigo+"'", null);
+            Cursor fila = baseDatos.rawQuery("SELECT * FROM aspirantes WHERE codigoasp = '"+codigo+"'", null);
 
             if (fila.getCount() <= 0){
-                registro.put("codigo", codigo);
-                registro.put("nombre", nombre);
-                registro.put("credito", credito);
-                registro.put("sueldo", sueldo);
+                registro.put("codigoasp", codigo);
+                registro.put("nombreasp", nombre);
+                registro.put("creditoasp", credito);
+                registro.put("sueldoasp", sueldo);
 
                 Integer s = Integer.parseInt(sueldo);
 
@@ -108,17 +108,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     baseDatos.insert("aspirantes", null, registro);
                     baseDatos.close();
 
-
                     //limpiar los campos despues de registrar
                     txtCode.setText("");
                     txtNombre.setText("");
                     txtCredito.setText("");
                     txtSueldo.setText("");
+                    Toast.makeText(this, "Se registro un aspirante", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(this, "No esta en el rango", Toast.LENGTH_SHORT).show();
                 }
-
-                Toast.makeText(this, "Se registro un aspirante", Toast.LENGTH_SHORT).show();
             }else {
                 Toast.makeText(this, "el código ya existe", Toast.LENGTH_SHORT).show();
             }
@@ -134,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         if (!codigo.isEmpty()) {
-            Cursor fila = baseDatos.rawQuery("SELECT * FROM aspirantes WHERE codigo = '"+codigo+"' ", null);
+            Cursor fila = baseDatos.rawQuery("SELECT * FROM aspirantes WHERE codigoasp = '"+codigo+"' ", null);
 
             if (fila.moveToFirst()) {
                 txtNombre.setText(fila.getString(1));
@@ -155,12 +153,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SQLiteDatabase baseDatos = db.getWritableDatabase();
 
         if(!codigo_.equals("")){
-            Cursor fila = baseDatos.rawQuery("SELECT * FROM aspirantes WHERE codigo = '"+codigo_+"' ", null);
+            Cursor fila = baseDatos.rawQuery("SELECT * FROM aspirantes WHERE codigoasp = '"+codigo_+"' ", null);
             if(fila.getCount() <=0){
                 Toast.makeText(this, "Nada para eliminar.", Toast.LENGTH_SHORT).show();
             }else {
-                    baseDatos.delete("pedidos","codigo = '"+codigo_+"' ",null);
+                    baseDatos.delete("aspirantes","codigoasp = '"+codigo_+"' ",null);
                     baseDatos.close();
+                txtCode.setText("");
+                txtNombre.setText("");
+                txtCredito.setText("");
+                txtSueldo.setText("");
                     Toast.makeText(this, "Se elimino.", Toast.LENGTH_SHORT).show();
             }
         }else{
